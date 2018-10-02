@@ -91,48 +91,42 @@
 	 crossorigin="anonymous"></script>
 	<!--	Firebase	-->
 	<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
-	<script src="firebase.js"></script>
-	<!-- login.js -->
-	<!-- <script src="login.js"></script> -->
-	<!-- auth.js -->
-	<!-- <script src="auth.js"></script> -->
+	<script src="/assets/js/firebase.js"></script>
+
 	<script>
-
-		// var username = '';
-
-		// $(document).ready(function () {
-		// 	//	Listens for users signing in or out
-		// 	firebase.auth().onAuthStateChanged(function (user) {
-		// 		if (user && username != '') {
-		// 			//	User successfully created
-		// 			user.updateProfile({
-		// 				displayName: username
-		// 			}).then(function () {
-		// 				db.ref('users/' + user.uid + '/userInfo').set({
-		// 					displayName: user.displayName,
-		// 					email: user.email
-		// 				});
-
-		// 				sendEmailVerification();
-		// 				window.location.href = '../index.html';
-		// 			}, function (error) {
-		// 				alert(error.message);
-		// 			});
-		// 		}
-		// 	});
-
-		// 	$('#signup-btn').click(function (event) {
-		// 		event.preventDefault();
-		// 		signUp();
-		// 	});
-		// 	//	Toggles Help Info on hover
-		// 	$('.help-icon').hover(function () {
-		// 		$('.tooltip-text').removeClass('js-hidden');
-		// 	}, function () {
-		// 		$('.tooltip-text').addClass('js-hidden');
-		// 	});
-		// });
-
-	</script>
+		var username = "";
+		
+		$(document).ready(function() {
+			//	Listens for users signing in or out
+			firebase.auth().onAuthStateChanged(function(user) {		
+				if(user && username != "") {
+					//	User successfully created
+					user.updateProfile({
+						displayName: username	
+					}).then(function() {
+						db.ref("users/" + user.uid + "/userInfo").set({
+							displayName: user.displayName,
+							email: user.email
+						});
+						sendEmailVerification();
+						window.location.href="../index.html";
+					}, function(error) {
+						alert(error.message);
+					});
+				}
+			});
+			
+			$("#signup-btn").click(function(event) {
+				event.preventDefault();
+				signUp();
+			});
+			//	Toggles Help Info on hover
+			$(".help-icon").hover(function() {
+				$(".tooltip-text").removeClass("js-hidden");
+			}, function() {
+				$(".tooltip-text").addClass("js-hidden");
+			});
+		});
+		</script>
 </body>
 </html>
